@@ -1,0 +1,18 @@
+
+.timeBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 208px;
+    height: 50px;
+    background: #3D3D3D;
+    border-radius: 28.34px;
+    padding: 15px 25px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    border: #3D3D3D;
+    font-size: 20px;
+    line-height: 8px;  
+    margin-right: 35px; 
+}

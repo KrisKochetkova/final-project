@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #06050B;;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    width: 800px;
+}
+
+.task {
+    display: flex;
+    padding: 25px;
+    margin: 30px;
+    background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
+    border-radius: 12.05px;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.task__title{
+  font-family: Lato;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.task__body{
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Lato;
+}
+
+
+  .time-svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 50%;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .bnt-container{
+    margin: 10px;
+  }
+  .date {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 6px;
+    margin-left: 15px;
+  }
+
+
+  .time-date {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .time-date-reminder{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .time-date-input {
+    display: flex;
+    margin-right: 35px;
+    width: 208px;
+    height: 50px;
+    justify-content: center;
+    background: #3D3D3D;
+    border-radius: 28.34px;
+    color: white;
+    border: #3D3D3D;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 11px;
+  }
+
+
+  
+

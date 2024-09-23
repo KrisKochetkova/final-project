@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    width: 130px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    background: linear-gradient(165deg, #A7C2DA 21.91%, #F5CFC4 94.63%);
+    border: none;
+    padding: 4px 0 0px 1px;
+    cursor: pointer;
+}
+
+
+
+.markBtn {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }

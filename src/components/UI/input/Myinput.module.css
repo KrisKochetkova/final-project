@@ -1,0 +1,27 @@
+.myInput {
+  
+    width: 100%;
+    padding: 5px 15px;
+    margin: 15px 0px;
+    background-color: #25252F;
+    border-radius: 12px;
+    color: white;
+    font-weight: 200;
+    font-size: medium;
+    border: #25252F;
+    
+}
+
+/* .searchIcon {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 40px;
+    height: 20px;
+    background: url(search-icon.svg) no-repeat 3px 1px;
+    color: #FFF;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  } */

@@ -1,0 +1,16 @@
+.completeBtn {
+    width: 80px;
+    height: 35px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.22);
+    font-weight: 300;
+    line-height: normal;
+    cursor: pointer;
+    border: 2px solid linear-gradient(165deg, #A7C2DA 21.91%, #F5CFC4 94.63%);;
+}
+
+.completeBtn:hover {
+    background-color: black;
+    color: bisque;
+    border: none;
+}
