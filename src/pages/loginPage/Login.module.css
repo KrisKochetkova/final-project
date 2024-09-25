@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.container {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.loginImage {
+    margin: 50px;
+}
+
+.titleText{
+    font-family: Lato;
+    font-weight: 800;
+    color: white;
+}
+.topGroup{
+    margin-bottom: 16px;
+    margin-left: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    white-space: nowrap;
+}
+
+.leftCircle {
+    margin-bottom: 9px;
+    margin-right: 8px;
+}
+
+
+.bottomGroup {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    white-space: nowrap;
+    margin-left: 90px;
+}
+
+
+
+.logInBtn{
+    font-family: Lato;
+    font-weight: 500;
+    margin: 35px;
+    padding: 15px;
+    width: 187.819px;
+    height: 43.943px;
+    flex-shrink: 0;
+    border-radius: 6.379px;
+    background: linear-gradient(88deg, #A7C2DA 0.45%, #F5CFC4 95.29%);
+    cursor: pointer;
+}
