@@ -1,6 +1,7 @@
 import React from "react";
 import CheckBoxbtn from "./UI/button/CheckBoxbtn";
 import CompleteBtn from "./UI/button/CompleteBtn"
+import moment from 'moment';
 
 const Taskitem = (props) => {
    
@@ -16,7 +17,8 @@ const Taskitem = (props) => {
                         </svg>
                     </div>
                     <div className="date">
-                        {props.task.time}
+                        {moment(props.task.valueTime).format('ddd MMM D HH:mm')}
+                        
                     </div>
                 </div>
                 

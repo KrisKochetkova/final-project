@@ -7,7 +7,7 @@ import moment from 'moment';
     const TaskForm = ({create}) => {
         const [valueTime, setValueTime] = useState('');
         const [isVisible, setIsVisible] = useState(false);
-        const [task, setTask] = useState({title: '',time:'', body: ''})
+        const [task, setTask] = useState({title: '',valueTime:'', body: ''})
         function handleChange(e) {
                 setValueTime(e.target.value);
                
@@ -18,12 +18,14 @@ import moment from 'moment';
          }
         const CreateNewTask = (e) => {
             e.preventDefault()
+            console.log("valueTime", valueTime)
             let formattedTime = moment(valueTime).format('ddd MMM D HH:mm');
+            console.log("formattedTime", formattedTime)
             const newTask = {
-                ...task, id: Date.now(), time: formattedTime
+                ...task, id: Date.now(), valueTime: formattedTime
             }
             create(newTask)
-            setTask({title: '',time:'', body: ''})
+            setTask({title: '',valueTime:'', body: ''})
         }
         
         return (

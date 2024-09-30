@@ -10,9 +10,9 @@ const TaskFilter = ({filter, setFilter}) => {
         onChange={selectedSort=> setFilter({...filter, sort: selectedSort})}
         defaultValue="Sort by"
         options={[
-          {value: 'title', name: "By name"},
-          {value: 'body', name: "By description"},
-          {value: 'time', name: "By date"},
+          {value: 'title', name: "Name"},
+          {value: 'body', name: "Description"},
+          {value: 'valueTime', name: "Date"},
           // {value: 'title', name: "By name"}
           // {value: 'title', name: "By name"}
         ]}

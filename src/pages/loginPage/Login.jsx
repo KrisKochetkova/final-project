@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from "./Login.module.css";
+import Mybutton from "../../components/UI/button/Mybutton"
+import MyModal from '../../components/my modal/MyModal';
+import Myinput from '../../components/UI/input/Myinput';
+
 
 const Login = () => {
+    const [modal, setModal] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    function handleClick(e) {
+        e.preventDefault();
+        setIsVisible(!isVisible);
+ }
     return (
         <div className={classes.container}>
              <div className={classes.loginImage}>
@@ -41,14 +51,36 @@ const Login = () => {
                 Do your task <br />Don’t just list them
             </p>
         </div>
-        <div className={`${classes.logIn} ${classes.position}`}>
-            <button className={classes.logInBtn}>
-                Dive In
+            <div className={`${classes.logIn} ${classes.position}`}>
+             <button onClick={()=> setModal(true)} className={classes.logInBtn}>
+            Dive In
             </button>
-        </div>
+            <MyModal visible={modal} setVisible={setModal}>              
+                 <Myinput
+                    type="email"
+                    placeholder="email@email.com"
+                />
+                 <Myinput
+                    type="password"
+                    placeholder="pasword"
+                 />
+                 <Mybutton
+                 type="submit"
+                onClick = {handleClick}
+                 >Submit</Mybutton>
+            </MyModal>
+             </div>
+            
+
     </div>
     
     )
 };
 
 export default Login;
+
+
+{/* <NewTaskbtn onClick={()=> setModal(true)}/>
+<MyModal visible={modal} setVisible={setModal}> 
+    <TaskForm create={createTask}/>
+</MyModal> */}

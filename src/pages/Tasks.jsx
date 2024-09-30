@@ -1,5 +1,5 @@
 
-import React, {useMemo, useState } from "react";
+import React, {useMemo, useState, useEffect } from "react";
 import '../styles/App.css'
 //import Taskitem from "./components/Taskitem";
 import Tasklist from "../components/Tasklist";
@@ -11,15 +11,17 @@ import TaskForm from "../components/UI/TaskForm";
 import MyModal from "../components/my modal/MyModal";
 
 import TaskFilter from "../components/TaskFilter";
+import db from "../app/db/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 
 function Tasks() {
 
-  
+  const currentDate =  Date()
     const [task, setTask] = useState(
         [
-          {id: 1, title:"Welcome to DO App!", time: " ", body: "Sample task, tap to edit task. You can also delete task by pressing the task. then click on the delete icon. "},
-          {id: 2, title:"Javascript 2", valueTime: " ", body: "Description"},
+          // {id: 1, title:"Welcome to DO App!", valueTime: currentDate, body: "Sample task, tap to edit task. You can also delete task by pressing the task. then click on the delete icon. "},
+          // {id: 2, title:"Javascript 2", valueTime: currentDate, body: "Description"},
         ]
     )
    
@@ -28,10 +30,23 @@ function Tasks() {
     const [modal, setModal] = useState(false);
     const [filter, setFilter] = useState({sort: '', query: ''})
 
+    useEffect(()=>
+      {
+      const getToDOItems = async() => {
+        const snapShot = await getDocs(collection(db, "to-do-items"));
+        const documents = snapShot.docs.map(item => item.data())
+        const toDoitems = documents.map(item => {return {...item, id: item.id.toMillis(), valueTime: item.valueTime.toMillis()}})
+        setTask(toDoitems)
+      }
+      getToDOItems();
+    }, []
+    )
    
     const sortedTask = useMemo(()=>{
-      console.log('its working')
       if(filter.sort){
+         if(filter.sort == "valueTime") {
+          return [...task].sort((a,b)=> a[filter.sort] - (b[filter.sort]))
+         }
         return [...task].sort((a,b)=> a[filter.sort].localeCompare(b[filter.sort]))
       }
       return task;
