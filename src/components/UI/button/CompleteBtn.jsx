@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from "../button/CompleteBtn.module.css"
 
-const CompleteBtn = () => {
+const CompleteBtn = ({...props}) => {
     return (
-      <button className= {classes.completeBtn}>
+      <button {...props} className= {classes.completeBtn}>
         Complete
       </button>
     );

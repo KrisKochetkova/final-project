@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Judson:wght@700&display=swap');
+
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url(../greeting/background.png);
+    block-size: cover;
+    background-repeat: repeat-y;
+    animation: moveUp 10s linear infinite; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+
+
+@keyframes moveUp {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100%;
+    }
+}
+
+h1 {
+    font-family: Judson;
+    font-size: 203.536px;
+    font-weight: 700;
+    background: linear-gradient(88deg, #A7C2DA 0.45%, #F5CFC4 95.29%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 38.773px;
+    font-weight: 500;
+}
+
+
+
+p {
+    margin: 25px;
+    color: #FFF;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+}
+

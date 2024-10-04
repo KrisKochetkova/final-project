@@ -1,17 +1,37 @@
 import React, {useState} from 'react';
 import classes from "./Login.module.css";
-import Mybutton from "../../components/UI/button/Mybutton"
 import MyModal from '../../components/my modal/MyModal';
 import Myinput from '../../components/UI/input/Myinput';
-
+import CheckBoxbtn from '../../components/UI/button/CheckBoxbtn';
+import Mybutton from '../../components/UI/button/Mybutton';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [isRegistered, setIsRegistered] = useState(true);
     const [modal, setModal] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false)
     function handleClick(e) {
         e.preventDefault();
         setIsVisible(!isVisible);
  }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isRegistered) {
+            //logic for login
+            console.log('login')
+        } else {
+            //logic for registration
+            console.log('registr')
+        }
+    }
+    const toggleForm = () => {
+        setIsRegistered((prev)=> !prev);
+    }
     return (
         <div className={classes.container}>
              <div className={classes.loginImage}>
@@ -52,35 +72,65 @@ const Login = () => {
             </p>
         </div>
             <div className={`${classes.logIn} ${classes.position}`}>
-             <button onClick={()=> setModal(true)} className={classes.logInBtn}>
-            Dive In
-            </button>
-            <MyModal visible={modal} setVisible={setModal}>              
-                 <Myinput
-                    type="email"
-                    placeholder="email@email.com"
-                />
-                 <Myinput
-                    type="password"
-                    placeholder="pasword"
-                 />
-                 <Mybutton
-                 type="submit"
-                onClick = {handleClick}
-                 >Submit</Mybutton>
-            </MyModal>
+                <button className={classes.logInBtn} onClick={()=> setModal(true)}>
+                Dive In
+                </button>
+                <MyModal visible={modal} setVisible={setModal}>
+                    <div className={classes.authContainer}>
+                        <h3 className={classes.authHeader}>{isRegistered ? 'Login' : 'Register'}</h3>
+                        <form onSubmit={handleSubmit}>
+                            {!isRegistered && (
+                                <div>
+                                <label className={classes.authLabel}>Email:</label>
+                                <Myinput
+                                type="email"
+                                value = {email}
+                                placeholder="email@email.com"
+                                onChange={(e)=> setEmail(e.target.value)}
+                                required
+                                />
+                                </div>
+                            )}
+                            <div>
+                                <label className={classes.authLabel}>Username:</label>
+                                <Myinput
+                                    type="text"
+                                    value = {username}
+                                    placeholder="Username"
+                                    onChange={(e)=> setUsername(e.target.value)}
+                                    required={!isRegistered}
+                                />
+                            </div>
+                            <div>
+                                <label className={classes.authLabel}>Password:</label>
+                                <Myinput
+                                    type="password"
+                                    value={password}
+                                    placeholder="Password"
+                                    onChange={(e)=> setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                             {isRegistered && (
+                                <div>
+                                    <CheckBoxbtn className={classes.authCheckBox}checked={rememberMe}  onChange={(e)=> setRememberMe(e.target.checked)}>
+                                        <p className={classes.checkBoxText}>Remember me</p>
+                                    </CheckBoxbtn>
+                                </div>
+                             )}
+                             <Mybutton type="submit">{isRegistered ? "Login" : "Register"}</Mybutton>
+                        </form>
+                        <p>
+                            {isRegistered ? "Don't have an account? " : "Already have an account? "}
+                            <Link to="#" onClick={toggleForm}>
+                                {isRegistered ? "Sign up!" : "Log in!"}
+                            </Link>
+                        </p>
+                    </div>
+                </MyModal>
              </div>
-            
-
     </div>
-    
     )
 };
 
 export default Login;
-
-
-{/* <NewTaskbtn onClick={()=> setModal(true)}/>
-<MyModal visible={modal} setVisible={setModal}> 
-    <TaskForm create={createTask}/>
-</MyModal> */}

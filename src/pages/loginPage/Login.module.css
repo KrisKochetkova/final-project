@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .container {
-    background-color: black;
+    background-color: #06050B;;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,4 +62,30 @@
     border-radius: 6.379px;
     background: linear-gradient(88deg, #A7C2DA 0.45%, #F5CFC4 95.29%);
     cursor: pointer;
+}
+
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.authHeader{
+    color: #000;
+    font-family: Lato;
+    font-weight: 400;
+}
+
+.authLabel {
+    font-family: Lato;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+
+
+.checkBoxText {
+    color: #000;
+    margin: 0;
 }

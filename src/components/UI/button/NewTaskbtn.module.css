@@ -1,3 +1,10 @@
+.newTaskBlock{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    margin-top: 15px;
+}
+
 .container {
     display: flex;
     width: 130px;

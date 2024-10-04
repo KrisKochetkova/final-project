@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
-import About from "../../pages/About";
-import Tasks from "../../pages/Tasks";
-import Error from "../../pages/Error";
+import About from "../../pages/about/About";
+import Tasks from "../../pages/tasks/Tasks";
+import Error from "../../pages/Error/Error";
 import Login from '../../pages/loginPage/Login';
-import Verification from '../../pages/verification/Verification';
+import Greeting from '../../pages/greeting/Greeting';
 
 
 const AppRouter = () => {
@@ -14,7 +14,7 @@ const AppRouter = () => {
         <Route path="/about" element={<About />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/verification' element={<Verification/>} />
+        <Route path='/greeting' element={<Greeting/>} />
         <Route path="/old-path" element={<Navigate to="/new-path" />} />
         <Route path="*" element={<Error />} /> 
       </Routes>

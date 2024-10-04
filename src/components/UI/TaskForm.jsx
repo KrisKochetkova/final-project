@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import Mybutton from "./button/Mybutton";
 import Myinput from "./input/Myinput";
 import Timebutton from "./button/Timebutton";
-import moment from 'moment';
+
 
     const TaskForm = ({create}) => {
         const [valueTime, setValueTime] = useState('');
@@ -18,11 +18,8 @@ import moment from 'moment';
          }
         const CreateNewTask = (e) => {
             e.preventDefault()
-            console.log("valueTime", valueTime)
-            let formattedTime = moment(valueTime).format('ddd MMM D HH:mm');
-            console.log("formattedTime", formattedTime)
             const newTask = {
-                ...task, id: Date.now(), valueTime: formattedTime
+                ...task, id: Date.now(), valueTime
             }
             create(newTask)
             setTask({title: '',valueTime:'', body: ''})
@@ -49,13 +46,8 @@ import moment from 'moment';
                             <input className="time-date-input" type="datetime-local" value={valueTime} onChange={handleChange}/>
                         )}
               </div>
-              
               <Mybutton onClick={CreateNewTask}>Create Task</Mybutton>
-              
-            
              </div>
-    
-                
             </form>
         );
     };

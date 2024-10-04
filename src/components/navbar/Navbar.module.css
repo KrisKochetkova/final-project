@@ -1,0 +1,35 @@
+.navbar{
+    position: fixed;
+    top: 85px;
+    right: 45px;
+    padding: 0 15px;
+  }
+  
+  .navbarLinks {
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .navbarLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 40px;
+    color: black;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
+  }
+
+  .navbarLink:hover {
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+  }

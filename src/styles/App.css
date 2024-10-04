@@ -10,7 +10,7 @@ body {
     background-color: #06050B;;
 }
 
-h1 {
+h3 {
   color: whitesmoke;
 }
 
@@ -63,6 +63,7 @@ h1 {
     margin: 10px;
   }
   .date {
+    font-family: Lato;
     font-weight: 700;
     font-size: 15px;
     line-height: 6px;
@@ -104,16 +105,34 @@ h1 {
     line-height: 11px;
   }
 
-  .navbar{
-    height: 50px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
-  }
-  
-  .navbar__links {
-    margin-left: auto;
-  }
+span{
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.22);
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.completed {
+  background: linear-gradient(56deg, rgba(167, 194, 218, 0.20) 21.6%, rgba(245, 207, 196, 0.20) 61.12%);
+}
+
+.doneTime{
+  fill: rgba(0, 0, 0, 0.20);
+}
+
+
+.done-btn {
+  color: #FFF;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
 

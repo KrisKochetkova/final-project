@@ -1,0 +1,14 @@
+.select {
+    border: none;
+    color: white;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 18px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.select:focus{
+    outline: none;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);;
+}

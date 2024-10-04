@@ -1,0 +1,93 @@
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url(background.png);
+    block-size: cover;
+    background-repeat: repeat-y;
+    animation: moveUp 10s linear infinite; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+
+@keyframes moveUp {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100%;
+    }
+}
+
+.greetingContentBox{
+    position: relative;
+    width: 70vw;
+    height: 70vh;
+    background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
+    border-radius: 12.049px;
+    overflow-y: auto;
+}
+
+.greetingCard{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.greetingHeader{
+ color: black;
+ margin: 10px 0;
+}
+
+.greetingSubHeader{
+    color: black;
+    font-family: Lato;
+    font-weight: 700;
+}
+
+h5 {
+    color: black;
+    font-family: Lato;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.greetingBody{
+
+}
+
+.greetingP {
+    color: black;
+   
+}
+
+.greetengBtns{
+ margin-top: 35px;
+ width: 100%;
+ bottom: 0;
+ display: flex;
+ justify-content: space-between;
+}
+
+.prevBtn, .nextBtn{
+ font-family: Lato;
+ font-weight: 300;
+ background-color: transparent;
+ border: none;
+ cursor: pointer;
+ margin: 5px 10px;
+}
+
+.saveSet {
+    width: 92px;
+    height: 30px;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 12px;
+    margin-right: 10px;
+    padding: 0;
+}
