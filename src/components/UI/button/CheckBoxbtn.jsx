@@ -1,15 +1,14 @@
 import React from 'react';
 import classes from "../button/CheckBoxbtn.module.css";
 
-const CheckBoxbtn = ({children, ...props}) => {
+const CheckBoxbtn = ({ ...props}) => {
     return (
-        <div className={classes.task__btn}>
-            <label className={classes.container__task__btn} >
-                <input {...props} type="checkbox"></input>
+        <label className={classes.task__btn}>
+            <div className={classes.container__task__btn} >
+                <input {...props}/>
                 <span className={classes.checkmark}></span>
-                {children}
-            </label>
-        </div>
+            </div>
+        </label>
     );
 };
 
