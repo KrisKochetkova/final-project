@@ -20,9 +20,9 @@ function Tasks() {
 
   const currentDate =  Date()
     const [tasks, setTasks] = useState(
-        [
-           {id: 1, title:"Welcome to DO App!", valueTime: currentDate, body: "Sample task, tap to edit task. You can also delete task by pressing the task. then click on the delete icon. "},
-           {id: 2, title:"Javascript 2", valueTime: currentDate, body: "Description"},
+       [
+        //    {id: 1, title:"Welcome to DO App!", valueTime: currentDate, body: "Sample task, tap to edit task. You can also delete task by pressing the task. then click on the delete icon. "},
+        //    {id: 2, title:"Javascript 2", valueTime: currentDate, body: "Description"},
         ]
     )
    
@@ -34,16 +34,16 @@ function Tasks() {
     
 
 
-    // useEffect(() => {
-    //   const getToDOItems = async() => {
-    //     const snapShot = await getDocs(collection(db, "to-do-items"));
-    //     const documents = snapShot.docs.map(item => item.data())
-    //     const toDoitems = documents.map(item => {return {...item, id: item.id.toMillis(), valueTime: item.valueTime.toMillis()}})
-    //     setTask(toDoitems)
-    //   }
-    //   getToDOItems();
-    // }, []
-    // )
+    useEffect(() => {
+      const getToDOItems = async() => {
+        const snapShot = await getDocs(collection(db, "to-do-items"));
+        const documents = snapShot.docs.map(item => item.data())
+        const toDoitems = documents.map(item => {return {...item, id: item.id.toMillis(), valueTime: item.valueTime.toMillis()}})
+        setTasks(toDoitems)
+      }
+      getToDOItems();
+    }, []
+    )
    
     const sortedTask = useMemo(()=>{
       if(filter.sort){

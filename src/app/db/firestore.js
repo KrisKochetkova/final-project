@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-const app = initializeApp ({
+export const app = initializeApp ({
     apiKey: process.env.REACT_APP_FIRESTORE_API_KEY,
     authDomain: process.env.REACT_APP_FIRESTORE_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_FIRESTORE_PROJECT_ID,
