@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import classes from "./Login.module.css";
 import MyModal from '../../components/my modal/MyModal';
 import Myinput from '../../components/UI/input/Myinput';
 import CheckBoxbtn from '../../components/UI/button/CheckBoxbtn';
 import Mybutton from '../../components/UI/button/Mybutton';
-import { Link } from 'react-router-dom';
+import { json, Link } from 'react-router-dom';
 import leftCircle from "./icons/leftCircle.svg"
 import leftSemiCircle from "./icons/leftSemicircle.svg"
 import rightCircle from "./icons/rightCircle.svg"
@@ -15,6 +15,7 @@ import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firesto
 import { useNavigate } from 'react-router-dom';
 import { addUser, getUserByUsername } from '../../app/db/firestoreOperations';
 import { signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { UserContext } from '../../context/userContext';
 
 
 
@@ -29,11 +30,20 @@ const Login = () => {
     const [user, setUser] = useState({})
     const [error, setError] = useState('')
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+            navigate('/greeting');
+        }
+    }, [navigate]);
+
     function handleClick(e) {
         e.preventDefault();
         setIsVisible(!isVisible);
     }
-    const navigate = useNavigate();
     const googleHandleClick = async () => {
         try {
             const response = await signInWithPopup(auth, provider);
@@ -43,6 +53,13 @@ const Login = () => {
         }
         catch(error){console.error(error)}
     }
+    const handleRememberMe = (user) => {
+        if (rememberMe) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        } else {
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+        }
+    };
 
     const loginUser = async (username, password) => {
         try {
@@ -50,7 +67,8 @@ const Login = () => {
             const email = userData.email;
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log('Пользователь вошел:', userCredential.user);
-            navigate('/greeting')
+            handleRememberMe(userCredential.user);
+            navigate('/greeting');
             return userCredential.user;
             
         }
@@ -64,23 +82,38 @@ const Login = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const userReg = userCredential.user; 
             await addUser(userReg.uid, {username, email});
-            console.log('user',userReg)
+            console.log('user',userReg);
+            handleRememberMe(userCredential.user);
             setUser(userReg);
-            navigate('/greeting')
+            navigate('/greeting');
         }
         catch(error){
-            console.error(error)
+            console.error(error);
         };  
     }
 
-    
+    const logoutUser = () => {
+        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
+        signOut(auth)
+            .then(() => {
+                setUser(null);
+                navigate('/login');
+        })
+        .catch((error) => {
+            console.error('error sign out', error);
+        });
+    };
+
+    const {setCurrentUser} = useContext(UserContext);
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
-            setUser(currentUser)
+            setUser(currentUser);
+            setCurrentUser(currentUser);
         } )
-        return ()=>unsubscribe();
-    },[]);
+        return () => unsubscribe();
+    },[setCurrentUser]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -88,16 +121,33 @@ const Login = () => {
         try {
             if (isRegistered) {
                 const userCredential = await loginUser(username, password);
-                console.log('Пользователь вошел:', userCredential);
+                handleRememberMe(userCredential);
+                console.log('User log in:', userCredential);
             } else {
-                await registerWithEmail(email, password);
-                console.log('Пользователь зарегистрирован');
+                const userCredential = await registerWithEmail(email, password);
+                handleRememberMe(userCredential);
+                console.log('User register');
             }
         }
         catch (error) {
             setError(error.message)
         }
     }
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setEmail(user.email);
+            setPassword(user.password);
+        };
+
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe();
+    }, []);
+
     const toggleForm = () => {
         setIsRegistered((prev)=> !prev);
     }
