@@ -1,0 +1,31 @@
+.btnContainer {
+    margin-bottom: 20px;
+}
+
+.btnLogOut{
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
+}
+
+.btnLogOutContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnLogOutText{
+    color: black;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 15px;
+    margin: 0 0 0 5px;
+}
+
+.btnLogOut:hover {
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+  }

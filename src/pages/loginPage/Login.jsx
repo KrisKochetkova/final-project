@@ -11,6 +11,7 @@ import rightCircle from "./icons/rightCircle.svg"
 import rightSemiCircle from "./icons/rightSemiCircle.svg"
 import {auth, provider} from "../../app/auth/firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 
 
@@ -27,7 +28,7 @@ const Login = () => {
         e.preventDefault();
         setIsVisible(!isVisible);
  }
-    async function googleHandleClick(e) {
+    const googleHandleClick = async () => {
         try {
             const response = await signInWithPopup(auth, provider);
             console.log('user',response.user)
@@ -35,6 +36,17 @@ const Login = () => {
         }
         catch(error){console.error(error)}
     }
+    const registerWithEmail = async (email, password) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const userReg = userCredential.user; 
+            console.log('user',userReg)
+            setUser(userReg);
+        }
+        catch(error){console.error(error)}
+    }
+
+    
     useEffect(()=>{
         // const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
         //     setUser(currentUser)
@@ -135,12 +147,14 @@ const Login = () => {
                                     </label>
                                 </div>
                              )}
-                             <Mybutton onClick={googleHandleClick}/>
-                             <label htmlFor="">
-                                {user?.displayName}
-                             </label>
+                             
                              <Mybutton type="submit">{isRegistered ? "Login" : "Register"}</Mybutton>
                         </form>
+
+                        <Mybutton onClick={googleHandleClick}>login google</Mybutton>
+                             {/* <label htmlFor="">
+                                {user?.displayName}
+                             </label> */}
                         <p>
                             {isRegistered ? "Don't have an account? " : "Already have an account? "}
                             <Link to="#" onClick={toggleForm}>
