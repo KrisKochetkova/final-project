@@ -10,8 +10,11 @@ import leftSemiCircle from "./icons/leftSemicircle.svg"
 import rightCircle from "./icons/rightCircle.svg"
 import rightSemiCircle from "./icons/rightSemiCircle.svg"
 import {auth, provider} from "../../app/auth/firebase";
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import db from '../../app/db/firestore';
+import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { addUser, getUserByUsername } from '../../app/db/firestoreOperations';
+import { signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 
@@ -24,44 +27,75 @@ const Login = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
     const [user, setUser] = useState({})
+    const [error, setError] = useState('')
+
     function handleClick(e) {
         e.preventDefault();
         setIsVisible(!isVisible);
- }
+    }
+    const navigate = useNavigate();
     const googleHandleClick = async () => {
         try {
             const response = await signInWithPopup(auth, provider);
             console.log('user',response.user)
             setUser(response.user)
+            navigate('/greeting')
         }
         catch(error){console.error(error)}
+    }
+
+    const loginUser = async (username, password) => {
+        try {
+            const userData = await getUserByUsername(username);
+            const email = userData.email;
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log('Пользователь вошел:', userCredential.user);
+            navigate('/greeting')
+            return userCredential.user;
+            
+        }
+        catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
     const registerWithEmail = async (email, password) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const userReg = userCredential.user; 
+            await addUser(userReg.uid, {username, email});
             console.log('user',userReg)
             setUser(userReg);
+            navigate('/greeting')
         }
-        catch(error){console.error(error)}
+        catch(error){
+            console.error(error)
+        };  
     }
 
     
+
     useEffect(()=>{
-        // const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
-        //     setUser(currentUser)
-        // } )
-        // return ()=>unsubscribe();
+        const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
+            setUser(currentUser)
+        } )
+        return ()=>unsubscribe();
     },[]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isRegistered) {
-            //logic for login
-            console.log('login')
-        } else {
-            //logic for registration
-            console.log('registr')
+        setError('');
+        try {
+            if (isRegistered) {
+                const userCredential = await loginUser(username, password);
+                console.log('Пользователь вошел:', userCredential);
+            } else {
+                await registerWithEmail(email, password);
+                console.log('Пользователь зарегистрирован');
+            }
+        }
+        catch (error) {
+            setError(error.message)
         }
     }
     const toggleForm = () => {
@@ -100,6 +134,7 @@ const Login = () => {
                     <div className={classes.authContainer}>
                         <h3 className={classes.authHeader}>{isRegistered ? 'Login' : 'Register'}</h3>
                         <form onSubmit={handleSubmit}>
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
                             {!isRegistered && (
                                 <div>
                                 <label className={classes.authLabel}>Email:</label>
@@ -152,9 +187,9 @@ const Login = () => {
                         </form>
 
                         <Mybutton onClick={googleHandleClick}>login google</Mybutton>
-                             {/* <label htmlFor="">
+                             <label htmlFor="">
                                 {user?.displayName}
-                             </label> */}
+                             </label>
                         <p>
                             {isRegistered ? "Don't have an account? " : "Already have an account? "}
                             <Link to="#" onClick={toggleForm}>
