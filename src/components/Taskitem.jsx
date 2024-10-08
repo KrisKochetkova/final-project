@@ -1,7 +1,7 @@
 import React from "react";
-import CheckBoxbtn from "./UI/button/CheckBoxbtn";
 import CompleteBtn from "./UI/button/CompleteBtn"
 import moment from 'moment';
+
 
 const Taskitem = (props) => {
    
@@ -33,11 +33,15 @@ const Taskitem = (props) => {
             </div>
             <div className="bnt-container">
                  {props.isDoneList ? (
-                    /* trunk-ignore(git-diff-check/error) */
+                   
                     <span>Completed</span> 
                 ) : (
-                    /* trunk-ignore(git-diff-check/error) */
-                    <CompleteBtn onClick={() => props.complete(props.task)} /> 
+                    
+                    <div className="active-btns-container">
+                        <CompleteBtn onClick={() => props.complete(props.task)}>Complete</CompleteBtn>
+                        <CompleteBtn onClick={() => props.remove(props.task)}>Remove</CompleteBtn>
+                    </div>
+
                 )}
             </div>
             

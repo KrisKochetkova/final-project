@@ -8,7 +8,7 @@ const Tasklist = ({ tasks, title, complete, remove, isDoneList}) => {
         <div>
             <h3 style={{ textAlign: 'center' }}>{title}</h3>
             {tasks.length > 0 ? (
-                /* trunk-ignore(git-diff-check/error) */
+                
                 tasks.map((task, index) => 
                     <Taskitem remove={remove} complete={complete}  isDoneList={isDoneList} number={index + 1} task={task} key={task.id} />
                 )

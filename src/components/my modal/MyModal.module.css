@@ -8,6 +8,19 @@
     background: rgba(0,0,0, 0.75);
 }
 
+/* .myModal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1000; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+ }  */
+
 .myModalContent {
     padding: 25px;
     background: linear-gradient(55.95deg, #A7C2DA 21.6%, #F5CFC4 61.12%);
@@ -20,3 +33,4 @@
     justify-content: center;
     align-items: center;
 }
+

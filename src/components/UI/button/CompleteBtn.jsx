@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from "../button/CompleteBtn.module.css"
 
-const CompleteBtn = ({...props}) => {
+const CompleteBtn = ({children, ...props }) => {
     return (
       <button {...props} className= {classes.completeBtn}>
-        Complete
+        {children}
       </button>
     );
 };

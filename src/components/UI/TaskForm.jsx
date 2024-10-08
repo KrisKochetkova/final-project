@@ -4,10 +4,13 @@ import Myinput from "./input/Myinput";
 import Timebutton from "./button/Timebutton";
 
 
+
+
     const TaskForm = ({create}) => {
         const [valueTime, setValueTime] = useState('');
         const [isVisible, setIsVisible] = useState(false);
-        const [task, setTask] = useState({title: '',valueTime:'', body: ''})
+        const [task, setTask] = useState({title: '',valueTime:'', body: ''});
+
         function handleChange(e) {
                 setValueTime(e.target.value);
                
@@ -16,12 +19,14 @@ import Timebutton from "./button/Timebutton";
                 e.preventDefault();
                 setIsVisible(!isVisible);
          }
-        const CreateNewTask = (e) => {
+        const CreateNewTask = async (e) => {
             e.preventDefault()
             const newTask = {
-                ...task, id: Date.now(), valueTime
+                ...task, 
+                //id: Date.now(), 
+                valueTime
             }
-            create(newTask)
+            await create(newTask)
             setTask({title: '',valueTime:'', body: ''})
         }
         

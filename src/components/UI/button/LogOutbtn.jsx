@@ -2,10 +2,10 @@ import React from 'react';
 import cl from "./LogOutBtn.module.css"
 import logOutIcon from "./logout-svgrepo-com.svg"
 
-const LogOutbtn = () => {
+const LogOutbtn = ({...props}) => {
     return (
         <div className={cl.btnContainer}>
-            <button className={cl.btnLogOut}>
+            <button {...props} className={cl.btnLogOut}>
                 <div className={cl.btnLogOutContent}>
                     <img src={logOutIcon} alt="logOutIcon" />
                     <p className={cl.btnLogOutText}>Log Out</p>

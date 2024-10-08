@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styles from './Greeting.module.css'
 import CheckBoxbtn from '../../components/UI/button/CheckBoxbtn';
 import Mybutton from '../../components/UI/button/Mybutton';
+import { Link } from 'react-router-dom';
+
 
 const Greeting = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +19,9 @@ const Greeting = () => {
       setCurrentIndex(currentIndex - 1);
         }
     };
-
+    function handleClick(e) {
+        e.preventDefault();
+    }
     return (
         <div className={styles.container}>
             {currentIndex === 0 && (
@@ -117,7 +121,7 @@ const Greeting = () => {
                                 <h6>How long before a task's deadline do you want to receive notifications?</h6>
                                 
                                 <label 
-                                htmlFor='tenMinutes'>
+                                         htmlFor='tenMinutes'>
                                         <CheckBoxbtn 
                                         id="tenMinutes" 
                                         type="radio" 
@@ -173,7 +177,13 @@ const Greeting = () => {
                             </fieldset>
                         </div>
                         <div className={styles.saveSet}>
-                            <Mybutton className={styles.saveSet}>Save Settings</Mybutton>
+                        
+                            <Mybutton className={styles.saveSet} onClick={handleClick}>
+                            <Link className={styles.saveLink} to={'/tasks'}>
+                                Save Settings
+                            </Link>
+                            </Mybutton>
+                        
                         </div> 
                         </form>
                          

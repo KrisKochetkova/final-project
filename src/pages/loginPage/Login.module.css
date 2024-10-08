@@ -89,3 +89,23 @@
     color: #000;
     margin-left: 25px;
 }
+
+.logInGoogleContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 10px;
+    line-height: normal;
+}
+.logInGoogleBtn{
+    display: flex;
+    margin-top: 20px;
+}
+
+.logInGoogleBtnP{
+    margin: 0 0 0 10px;
+}
+.logInSubmit{
+    display: flex;
+    justify-content: center;
+}
