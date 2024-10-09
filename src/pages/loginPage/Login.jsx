@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classes from "./Login.module.css";
 import MyModal from '../../components/my modal/MyModal';
@@ -10,7 +10,7 @@ import rightSemiCircle from "./icons/rightSemiCircle.svg";
 import googleIcon from "./icons/google.svg";
 import { auth, provider } from "../../app/auth/firebase";
 import { addUser, getUserByUsername } from '../../app/db/firestoreOperations';
-import { signInWithPopup, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { UserContext } from '../../context/userContext';
 import LoginForm from './LoginForm';
 
@@ -62,7 +62,7 @@ const Login = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const userReg = userCredential.user; 
-            await addUser(userReg.uid, { username, email });
+            await addUser(userReg.uid, { username, email, items: [{title:"", valueTime: new Date(), body:""}], createdAt: new Date(), });
             console.log('user', userReg);
             handleRememberMe(userCredential.user);
             setUser(userReg);
@@ -71,14 +71,6 @@ const Login = () => {
             console.error(error);
         }
     };
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setCurrentUser(currentUser);
-        });
-        return () => unsubscribe();
-    }, [setCurrentUser]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

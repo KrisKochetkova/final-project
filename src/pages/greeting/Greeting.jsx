@@ -56,32 +56,32 @@ const Greeting = () => {
                     <h3 className={styles.greetingSubHeader}>Key Features:</h3>
                     <div className={styles.greetingBody}>
                         <div className={styles.greetingItem}>
+                        <h5>Adding Tasks: </h5> 
                             <p className={styles.greetingP}>
-                                <h5>Adding Tasks: </h5> 
                                 Click the "Add" button to create a new task.
                             </p>
                         </div>
                         <div className={styles.greetingItem}>
+                        <h5>Editing Tasks: </h5>
                             <p className={styles.greetingP}>
-                                <h5>Editing Tasks: </h5>
                                 Select a task and click "Edit" to make changes.
                             </p>
                         </div>
                         <div className={styles.greetingItem}>
+                            <h5> Deleting Tasks: </h5>
                             <p className={styles.greetingP}>
-                                <h5> Deleting Tasks: </h5>
                                 Select a task and click "Delete" to remove it from the list.
                             </p>
                         </div>
                         <div className={styles.greetingItem}>
+                        <h5>Setting Priorities: </h5>
                             <p className={styles.greetingP}>
-                                <h5>Setting Priorities: </h5>
                                 Choose a priority level for each task (low, medium, high).
                             </p>
                         </div>
                         <div className={styles.greetingItem}>
+                        <h5>Setting Reminders: </h5>
                             <p className={styles.greetingP}>
-                                <h5>Setting Reminders: </h5>
                                 Specify when you want to receive reminders.
                             </p>
                         </div>

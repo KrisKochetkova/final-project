@@ -1,11 +1,8 @@
 
 import React, {useMemo, useState, useEffect } from "react";
 import '../../styles/App.css'
-//import Taskitem from "./components/Taskitem";
 import Tasklist from "../../components/Tasklist";
 import Navbar from "../../components/navbar/Navbar";
-
-//import CompleteBtn from "./components/UI/button/CompleteBtn"
 import LogOutbtn from "../../components/UI/button/LogOutbtn"
 import NewTaskbtn from "../../components/UI/button/NewTaskbtn"
 import TaskForm from "../../components/UI/TaskForm";
@@ -19,18 +16,18 @@ import { createTask, removeTask, completeTask, fetchCompletedTasks } from "../..
 import { signOut } from 'firebase/auth';
 import { auth } from "../../app/auth/firebase";
 import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 
 function Tasks() {
 
-  const currentDate =  Date()
-    const [tasks, setTasks] = useState([])
-    const [doneTasks, setDoneTasks] = useState ([])
+    const [tasks, setTasks] = useState([]);
+    const [doneTasks, setDoneTasks] = useState ([]);
     const [modal, setModal] = useState(false);
-    const [filter, setFilter] = useState({sort: '', query: ''})
-    const [user, setUser] = useState({})
-    
+    const [filter, setFilter] = useState({sort: '', query: ''});
+    const [user, setUser] = useState({});
+    const [show, setShow] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -70,32 +67,25 @@ function Tasks() {
         setModal(false);
       }
     }
-
-    // const createTask = (newTask) => {
-    //     setTasks([...tasks,newTask])
-    //     setModal(false)
-    // }
     const complete = async (task) => {
       await completeTask(task.id);
       setTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
       setDoneTasks(prevDoneTasks => [...prevDoneTasks, task]);
     }
-    // const completeTask = (task) => {
-    //   setTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
-    //   setDoneTasks(prevDoneTasks => [...prevDoneTasks, task]);
-    // }
-    
     const remove = async (task) => {
       await removeTask(task.id);
       setTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
     }
 
-    // const remove = (task) => {
-    //   setTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
-    // }
-
-    const [show, setShow] = useState(true);
-
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (!currentUser) {
+        navigate('/login'); 
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
     const logoutUser = () => {
       localStorage.removeItem('currentUser');
         sessionStorage.removeItem('currentUser');
@@ -103,6 +93,7 @@ function Tasks() {
           .then(() => {
             setUser(null);
               navigate('/login');
+              window.location.reload(); 
           })
           .catch((error) => {
             console.error('error sign out', error);
@@ -111,7 +102,7 @@ function Tasks() {
    return (
     
     <div className="App">
-        <LogOutbtn onClick={logoutUser}/>
+        <LogOutbtn type="submit" onClick={logoutUser}/>
         <Navbar/>
       <div className="fixed-top">
           <NewTaskbtn onClick={()=> setModal(true)}/>
